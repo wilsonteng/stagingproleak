@@ -3,29 +3,55 @@
 <head>
     <title>LTD2 Proleak Finder</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        h3, p {
+            margin: 1em 0;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
         body { 
             font-family: 'Open Sans', sans-serif;
+            padding: 1.5em;
         }
-        .btn-container {
-            max-width: 1000px;
+
+        #btn-container {
+            max-width: 1200px;
+            padding: 1em 0;
         }
 
         .btn {
-            width: 40px;
-            height: 40px;
-            padding: 0;
-            margin: 5px;
-            border: 1px black solid;
+            width:40px;
+            height:40px;
+            display: inline;
             vertical-align: middle;
+            border: none;
+            margin: 5px;
+            background:none;
         }
-        
-        .active {
-            border: 5px #55a784 solid;
+
+        .all {
+            border: 5px solid transparent;
+            background: grey;
         }
-        
-        p {
-            font-size: 14px;
-            }
+
+        .btn, .all {
+            outline: 5px solid transparent;
+            display: inline;
+        }
+
+        .active, .all .active {
+            outline: 5px solid #87f94c;
+        }
+
+        .btn:hover, .all:hover{
+            outline: 5px solid #f4ce34;
+        }
 
         .board {
             position:relative;
@@ -50,6 +76,7 @@
             margin:0;
             padding:0;
             position:absolute;
+
         }
 
         .column {
@@ -58,7 +85,6 @@
             width: 400px;
             }
 
-        /* Clear floats after the columns */
         .row:after {
             content: "";
             display: table;
@@ -68,6 +94,7 @@
         .row {
             border-bottom: 1px solid #1b1b1b;
             margin: 0em 1em;
+            transition: transform 0.7s ease-in-out;
         }
 
         .leakpercent {
@@ -93,7 +120,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
-    <script src="../assets/script.js"></script> 
+    <script src="assets/script.js"></script> 
 <style> 
         img { width: 40px;}
 
@@ -103,7 +130,7 @@
             background-size: 40px 40px;
         }
     
-    </style></head><body><div class="row"><p>Last Updated On 2023-12-09 at 03:41:17 UTC by Wilson Teng<div id="btn-container"><button class="btn active" onclick="filterSelection('all')">All</button><button class="btn" onclick="filterSelection('sea_serpent_unit_id')"><img src="https://cdn.legiontd2.com/Icons/SeaSerpent.png" alt="Sea"></button><button class="btn" onclick="filterSelection('ranger_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Ranger.png" alt="Ranger"></button><button class="btn" onclick="filterSelection('harpy_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Harpy.png" alt="Harpy"></button><button class="btn" onclick="filterSelection('chained_fist_unit_id')"><img src="https://cdn.legiontd2.com/Icons/ChainedFist.png" alt="Chained"></button><button class="btn" onclick="filterSelection('desert_pilgrim_unit_id')"><img src="https://cdn.legiontd2.com/Icons/DesertPilgrim.png" alt="Desert"></button><button class="btn" onclick="filterSelection('gateguard_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Gateguard.png" alt="Gateguard"></button><button class="btn" onclick="filterSelection('devilfish_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Devilfish.png" alt="Devilfish"></button><button class="btn" onclick="filterSelection('bone_warrior_unit_id')"><img src="https://cdn.legiontd2.com/Icons/BoneWarrior.png" alt="Bone"></button><button class="btn" onclick="filterSelection('honeyflower_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Honeyflower.png" alt="Honeyflower"></button><button class="btn" onclick="filterSelection('nekomata_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Nekomata.png" alt="Nekomata d"></button><button class="btn" onclick="filterSelection('pollywog_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Pollywog.png" alt="Pollywog"></button><button class="btn" onclick="filterSelection('pirate_skeleton_unit_id')"><img src="https://cdn.legiontd2.com/Icons/PirateSkeleton.png" alt="Pirate"></button><button class="btn" onclick="filterSelection('aqua_spirit_unit_id')"><img src="https://cdn.legiontd2.com/Icons/AquaSpirit.png" alt="Aqua"></button><button class="btn" onclick="filterSelection('gargoyle_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Gargoyle.png" alt="Gargoyle"></button><button class="btn" onclick="filterSelection('bazooka_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Bazooka.png" alt="Bazooka"></button><button class="btn" onclick="filterSelection('atom_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Atom.png" alt="Atom"></button><button class="btn" onclick="filterSelection('buzz_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Buzz.png" alt="Buzz"></button><button class="btn" onclick="filterSelection('golden_buckler_unit_id')"><img src="https://cdn.legiontd2.com/Icons/GoldenBuckler.png" alt="Golden"></button><button class="btn" onclick="filterSelection('peewee_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Peewee.png" alt="Peewee"></button><button class="btn" onclick="filterSelection('slime_larva_unit_id')"><img src="https://cdn.legiontd2.com/Icons/SlimeLarva.png" alt="Slime"></button><button class="btn" onclick="filterSelection('wileshroom_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Wileshroom.png" alt="Wileshroom"></button><button class="btn" onclick="filterSelection('proton_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Proton.png" alt="Proton"></button><button class="btn" onclick="filterSelection('sacred_steed_unit_id')"><img src="https://cdn.legiontd2.com/Icons/SacredSteed.png" alt="Sacred"></button><button class="btn" onclick="filterSelection('seedling_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Seedling.png" alt="Seedling"></button><button class="btn" onclick="filterSelection('infiltrator_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Infiltrator.png" alt="Infiltrator"></button><button class="btn" onclick="filterSelection('chloropixie_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Chloropixie.png" alt="Chloropixie"></button><button class="btn" onclick="filterSelection('howler_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Howler.png" alt="Howler"></button><button class="btn" onclick="filterSelection('treant_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Treant.png" alt="Treant"></button><button class="btn" onclick="filterSelection('zeus_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Zeus.png" alt="Zeus"></button><button class="btn" onclick="filterSelection('looter_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Looter.png" alt="Looter"></button><button class="btn" onclick="filterSelection('seraphin_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Seraphin.png" alt="Seraphin"></button><button class="btn" onclick="filterSelection('consort_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Consort.png" alt="Consort"></button><button class="btn" onclick="filterSelection('windhawk_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Windhawk.png" alt="Windhawk"></button></div></div><div class="row filterDiv sacred_steed_unit_id chained_fist_unit_id windhawk_unit_id"><h3>1 – Game ID: 28616cb6efef155a9a5c26fc120443c5360678f2cb39fbd2bd68da6bb1296f5a</h3><p>Balla Calla // Normal // Fiesta // 2023-12-05 // Version v10.11.1 </p><p class="leakpercent">Total Average Leak: <span>24%</span></p><div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:240.0px; left:40.0px;'></div>
+    </style></head><body><div class="row"><p>Last Updated On 2023-12-12 at 02:09:38 UTC by Wilson Teng<div id="btn-container"><button class="btn all active" onclick="filterSelection('all')">All</button><button class="btn" onclick="filterSelection('howler_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Howler.png" alt="Howler"></button><button class="btn" onclick="filterSelection('desert_pilgrim_unit_id')"><img src="https://cdn.legiontd2.com/Icons/DesertPilgrim.png" alt="Desert"></button><button class="btn" onclick="filterSelection('ranger_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Ranger.png" alt="Ranger"></button><button class="btn" onclick="filterSelection('sea_serpent_unit_id')"><img src="https://cdn.legiontd2.com/Icons/SeaSerpent.png" alt="Sea"></button><button class="btn" onclick="filterSelection('masked_spirit_unit_id')"><img src="https://cdn.legiontd2.com/Icons/MaskedSpirit.png" alt="Masked"></button><button class="btn" onclick="filterSelection('wileshroom_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Wileshroom.png" alt="Wileshroom"></button><button class="btn" onclick="filterSelection('seedling_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Seedling.png" alt="Seedling"></button><button class="btn" onclick="filterSelection('honeyflower_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Honeyflower.png" alt="Honeyflower"></button><button class="btn" onclick="filterSelection('consort_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Consort.png" alt="Consort"></button><button class="btn" onclick="filterSelection('slime_siren_unit_id')"><img src="https://cdn.legiontd2.com/Icons/SlimeSiren.png" alt="Slime"></button><button class="btn" onclick="filterSelection('peewee_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Peewee.png" alt="Peewee"></button><button class="btn" onclick="filterSelection('zeus_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Zeus.png" alt="Zeus"></button><button class="btn" onclick="filterSelection('chained_fist_unit_id')"><img src="https://cdn.legiontd2.com/Icons/ChainedFist.png" alt="Chained"></button><button class="btn" onclick="filterSelection('buzz_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Buzz.png" alt="Buzz"></button><button class="btn" onclick="filterSelection('gateguard_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Gateguard.png" alt="Gateguard"></button><button class="btn" onclick="filterSelection('bone_warrior_unit_id')"><img src="https://cdn.legiontd2.com/Icons/BoneWarrior.png" alt="Bone"></button><button class="btn" onclick="filterSelection('devilfish_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Devilfish.png" alt="Devilfish"></button><button class="btn" onclick="filterSelection('proton_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Proton.png" alt="Proton"></button><button class="btn" onclick="filterSelection('looter_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Looter.png" alt="Looter"></button><button class="btn" onclick="filterSelection('sacred_steed_unit_id')"><img src="https://cdn.legiontd2.com/Icons/SacredSteed.png" alt="Sacred"></button><button class="btn" onclick="filterSelection('seraphin_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Seraphin.png" alt="Seraphin"></button><button class="btn" onclick="filterSelection('gargoyle_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Gargoyle.png" alt="Gargoyle"></button><button class="btn" onclick="filterSelection('bazooka_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Bazooka.png" alt="Bazooka"></button><button class="btn" onclick="filterSelection('atom_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Atom.png" alt="Atom"></button><button class="btn" onclick="filterSelection('infiltrator_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Infiltrator.png" alt="Infiltrator"></button><button class="btn" onclick="filterSelection('seadragon_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Seadragon.png" alt="Seadragon"></button><button class="btn" onclick="filterSelection('windhawk_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Windhawk.png" alt="Windhawk"></button><button class="btn" onclick="filterSelection('veteran_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Veteran.png" alt="Veteran"></button><button class="btn" onclick="filterSelection('nekomata_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Nekomata.png" alt="Nekomata d"></button><button class="btn" onclick="filterSelection('golden_buckler_unit_id')"><img src="https://cdn.legiontd2.com/Icons/GoldenBuckler.png" alt="Golden"></button><button class="btn" onclick="filterSelection('pollywog_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Pollywog.png" alt="Pollywog"></button><button class="btn" onclick="filterSelection('pirate_skeleton_unit_id')"><img src="https://cdn.legiontd2.com/Icons/PirateSkeleton.png" alt="Pirate"></button><button class="btn" onclick="filterSelection('aqua_spirit_unit_id')"><img src="https://cdn.legiontd2.com/Icons/AquaSpirit.png" alt="Aqua"></button><button class="btn" onclick="filterSelection('harpy_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Harpy.png" alt="Harpy"></button><button class="btn" onclick="filterSelection('false_maiden_unit_id')"><img src="https://cdn.legiontd2.com/Icons/FalseMaiden.png" alt="False"></button><button class="btn" onclick="filterSelection('chloropixie_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Chloropixie.png" alt="Chloropixie"></button><button class="btn" onclick="filterSelection('slime_larva_unit_id')"><img src="https://cdn.legiontd2.com/Icons/SlimeLarva.png" alt="Slime"></button><button class="btn" onclick="filterSelection('treant_unit_id')"><img src="https://cdn.legiontd2.com/Icons/Treant.png" alt="Treant"></button></div></div><div class="row filterDiv chained_fist_unit_id sacred_steed_unit_id windhawk_unit_id"><h3>1 – Game ID: 28616cb6efef155a9a5c26fc120443c5360678f2cb39fbd2bd68da6bb1296f5a</h3><p>Balla Calla // Normal // Fiesta // 2023-12-05 // Version v10.11.1 </p><p class="leakpercent">Total Average Leak: <span>24%</span></p><div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:240.0px; left:40.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Windhawk</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -131,7 +158,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv bazooka_unit_id gateguard_unit_id consort_unit_id"><h3>3 – Game ID: 15f7349802dc84cac2875018fe58129b0e7a7c49db52bd737569bf89bcdd867a</h3><p>Snitchables // Normal // Fiesta // 2023-12-05 // Version v10.11.1 </p><p class="leakpercent">Total Average Leak: <span>21%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:0.0px;'></div>
+<div class="row filterDiv gateguard_unit_id bazooka_unit_id consort_unit_id"><h3>3 – Game ID: 15f7349802dc84cac2875018fe58129b0e7a7c49db52bd737569bf89bcdd867a</h3><p>Snitchables // Normal // Fiesta // 2023-12-05 // Version v10.11.1 </p><p class="leakpercent">Total Average Leak: <span>21%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:0.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -147,7 +174,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv sacred_steed_unit_id atom_unit_id golden_buckler_unit_id proton_unit_id"><h3>4 – Game ID: cc66d2651697457be128327e6d6866ab190c6b2c12f394fdcf1ebb29fd6c2ead</h3><p>yipyip // Normal // Fiesta // 2023-12-05 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>28%</span></p><div class="column"><div class="board"><img alt="Atom" src='https://cdn.legiontd2.com/Icons/Atom.png' style='bottom:0.0px; left:0.0px;'><img alt="Proton" src='https://cdn.legiontd2.com/Icons/Proton.png' style='bottom:0.0px; left:320.0px;'></div>
+<div class="row filterDiv proton_unit_id sacred_steed_unit_id atom_unit_id golden_buckler_unit_id"><h3>4 – Game ID: cc66d2651697457be128327e6d6866ab190c6b2c12f394fdcf1ebb29fd6c2ead</h3><p>yipyip // Normal // Fiesta // 2023-12-05 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>28%</span></p><div class="column"><div class="board"><img alt="Atom" src='https://cdn.legiontd2.com/Icons/Atom.png' style='bottom:0.0px; left:0.0px;'><img alt="Proton" src='https://cdn.legiontd2.com/Icons/Proton.png' style='bottom:0.0px; left:320.0px;'></div>
 <p class="leakpercent">Wave 1: <span>25%</span></p><p class="buildtext">Atom, Proton</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -178,7 +205,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv howler_unit_id bazooka_unit_id pollywog_unit_id"><h3>6 – Game ID: 6b02a1e66d113193d59fb382b58e0f035236368c39f266c34bab631b547969f3</h3><p>hiarogalo // Classic // Fiesta // 2023-12-05 // Version v10.11.1 </p><p class="leakpercent">Total Average Leak: <span>23%</span></p><div class="column"><div class="board"><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:400.0px; left:0.0px;'><img alt="Howler" src='https://cdn.legiontd2.com/Icons/Howler.png' style='bottom:240.0px; left:320.0px;'><img alt="Howler" src='https://cdn.legiontd2.com/Icons/Howler.png' style='bottom:180.0px; left:40.0px;'></div>
+<div class="row filterDiv pollywog_unit_id bazooka_unit_id howler_unit_id"><h3>6 – Game ID: 6b02a1e66d113193d59fb382b58e0f035236368c39f266c34bab631b547969f3</h3><p>hiarogalo // Classic // Fiesta // 2023-12-05 // Version v10.11.1 </p><p class="leakpercent">Total Average Leak: <span>23%</span></p><div class="column"><div class="board"><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:400.0px; left:0.0px;'><img alt="Howler" src='https://cdn.legiontd2.com/Icons/Howler.png' style='bottom:240.0px; left:320.0px;'><img alt="Howler" src='https://cdn.legiontd2.com/Icons/Howler.png' style='bottom:180.0px; left:40.0px;'></div>
 <p class="leakpercent">Wave 1: <span>25%</span></p><p class="buildtext">Bazooka, Howler, Howler</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -191,7 +218,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv buzz_unit_id gateguard_unit_id consort_unit_id"><h3>7 – Game ID: 8cefdb8f2ce2f231df8d4be8b350c34893f9dcbf24983b5895cae5fd483ad20f</h3><p>Assobot // Classic // Fiesta // 2023-12-05 // Version v10.11.1 </p><p class="leakpercent">Total Average Leak: <span>24%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:160.0px; left:0.0px;'></div>
+<div class="row filterDiv gateguard_unit_id buzz_unit_id consort_unit_id"><h3>7 – Game ID: 8cefdb8f2ce2f231df8d4be8b350c34893f9dcbf24983b5895cae5fd483ad20f</h3><p>Assobot // Classic // Fiesta // 2023-12-05 // Version v10.11.1 </p><p class="leakpercent">Total Average Leak: <span>24%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:160.0px; left:0.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -220,7 +247,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv desert_pilgrim_unit_id buzz_unit_id consort_unit_id"><h3>9 – Game ID: 0f9c646180f998fd269132d277f3612d1bf43b3dccf1fada887ea5f9b28e870a</h3><p>LegionAsh // Classic // Fiesta // 2023-12-05 // Version v10.11.1 </p><p class="leakpercent">Total Average Leak: <span>25%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:440.0px; left:0.0px;'></div>
+<div class="row filterDiv buzz_unit_id consort_unit_id desert_pilgrim_unit_id"><h3>9 – Game ID: 0f9c646180f998fd269132d277f3612d1bf43b3dccf1fada887ea5f9b28e870a</h3><p>LegionAsh // Classic // Fiesta // 2023-12-05 // Version v10.11.1 </p><p class="leakpercent">Total Average Leak: <span>25%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:440.0px; left:0.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -234,7 +261,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv pirate_skeleton_unit_id buzz_unit_id consort_unit_id bazooka_unit_id"><h3>10 – Game ID: a44a33ac678e6c316f4633fdb1eb2e3ce219310055264f0a27fb7fbf148ab3b0</h3><p>TireP0pper // Classic // Fiesta // 2023-12-05 // Version v10.11.1 </p><p class="leakpercent">Total Average Leak: <span>21%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:0.0px;'></div>
+<div class="row filterDiv buzz_unit_id bazooka_unit_id consort_unit_id pirate_skeleton_unit_id"><h3>10 – Game ID: a44a33ac678e6c316f4633fdb1eb2e3ce219310055264f0a27fb7fbf148ab3b0</h3><p>TireP0pper // Classic // Fiesta // 2023-12-05 // Version v10.11.1 </p><p class="leakpercent">Total Average Leak: <span>21%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:0.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -276,7 +303,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv sacred_steed_unit_id buzz_unit_id consort_unit_id"><h3>13 – Game ID: 05d08cf95aee3ad90407a4293bae25cf36f74bd548b92071aa16eac04697a2e8</h3><p>FreshWar // Classic // Fiesta // 2023-12-05 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>26%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:0.0px;'></div>
+<div class="row filterDiv buzz_unit_id consort_unit_id sacred_steed_unit_id"><h3>13 – Game ID: 05d08cf95aee3ad90407a4293bae25cf36f74bd548b92071aa16eac04697a2e8</h3><p>FreshWar // Classic // Fiesta // 2023-12-05 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>26%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:0.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -291,7 +318,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Lizard' src='https://cdn.legiontd2.com/Icons/Lizard.png'></div>
 </div>
 </div>
-<div class="row filterDiv bone_warrior_unit_id bazooka_unit_id"><h3>14 – Game ID: 1787259e9307fa97ba33773553e531bc3a445e624bab0ebd201ab5f5465070dc</h3><p>Nanvi // Classic // LockIn // 2023-12-05 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>25%</span></p><div class="column"><div class="board"><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:240.0px; left:160.0px;'><img alt="Bone" src='https://cdn.legiontd2.com/Icons/BoneWarrior.png' style='bottom:320.0px; left:80.0px;'></div>
+<div class="row filterDiv bazooka_unit_id bone_warrior_unit_id"><h3>14 – Game ID: 1787259e9307fa97ba33773553e531bc3a445e624bab0ebd201ab5f5465070dc</h3><p>Nanvi // Classic // LockIn // 2023-12-05 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>25%</span></p><div class="column"><div class="board"><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:240.0px; left:160.0px;'><img alt="Bone" src='https://cdn.legiontd2.com/Icons/BoneWarrior.png' style='bottom:320.0px; left:80.0px;'></div>
 <p class="leakpercent">Wave 1: <span>25%</span></p><p class="buildtext">Bazooka, Bone</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -306,7 +333,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Lizard' src='https://cdn.legiontd2.com/Icons/Lizard.png'></div>
 </div>
 </div>
-<div class="row filterDiv buzz_unit_id consort_unit_id bazooka_unit_id"><h3>15 – Game ID: dbc951acf8bea138dff93aec999f930098dea242ae5e5b2f86fb901740b2db46</h3><p>Gefrierfach // Classic // Fiesta // 2023-12-05 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>23%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:320.0px; left:320.0px;'></div>
+<div class="row filterDiv buzz_unit_id bazooka_unit_id consort_unit_id"><h3>15 – Game ID: dbc951acf8bea138dff93aec999f930098dea242ae5e5b2f86fb901740b2db46</h3><p>Gefrierfach // Classic // Fiesta // 2023-12-05 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>23%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:320.0px; left:320.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -320,7 +347,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv seedling_unit_id chloropixie_unit_id"><h3>16 – Game ID: fb1cfeece1a0f7374a58f3aabf8281168347040ddccd6eb7e950ea8151b05d8d</h3><p>skillz // Normal // Fiesta // 2023-12-06 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>22%</span></p><div class="column"><div class="board"><img alt="Chloropixie" src='https://cdn.legiontd2.com/Icons/Chloropixie.png' style='bottom:480.0px; left:0.0px;'><img alt="Seedling" src='https://cdn.legiontd2.com/Icons/Seedling.png' style='bottom:480.0px; left:320.0px;'></div>
+<div class="row filterDiv chloropixie_unit_id seedling_unit_id"><h3>16 – Game ID: fb1cfeece1a0f7374a58f3aabf8281168347040ddccd6eb7e950ea8151b05d8d</h3><p>skillz // Normal // Fiesta // 2023-12-06 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>22%</span></p><div class="column"><div class="board"><img alt="Chloropixie" src='https://cdn.legiontd2.com/Icons/Chloropixie.png' style='bottom:480.0px; left:0.0px;'><img alt="Seedling" src='https://cdn.legiontd2.com/Icons/Seedling.png' style='bottom:480.0px; left:320.0px;'></div>
 <p class="leakpercent">Wave 1: <span>25%</span></p><p class="buildtext">Chloropixie, Seedling</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -392,7 +419,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv sea_serpent_unit_id buzz_unit_id consort_unit_id"><h3>21 – Game ID: 50f67cae5b67582ea27d261171bf20f2561346dc56fd209e76d9d86b972d63b6</h3><p>chl4myd14 // Classic // Fiesta // 2023-12-06 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>16%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:180.0px; left:40.0px;'></div>
+<div class="row filterDiv buzz_unit_id sea_serpent_unit_id consort_unit_id"><h3>21 – Game ID: 50f67cae5b67582ea27d261171bf20f2561346dc56fd209e76d9d86b972d63b6</h3><p>chl4myd14 // Classic // Fiesta // 2023-12-06 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>16%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:180.0px; left:40.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -405,7 +432,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv buzz_unit_id consort_unit_id treant_unit_id"><h3>22 – Game ID: d3ad2fa1c2242d4e1e7fb3978f4644d0d0478ec0c3be1172f6829d561b87c460</h3><p>Jonko // Classic // Fiesta // 2023-12-06 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>23%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:200.0px; left:280.0px;'></div>
+<div class="row filterDiv treant_unit_id buzz_unit_id consort_unit_id"><h3>22 – Game ID: d3ad2fa1c2242d4e1e7fb3978f4644d0d0478ec0c3be1172f6829d561b87c460</h3><p>Jonko // Classic // Fiesta // 2023-12-06 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>23%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:200.0px; left:280.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -432,7 +459,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Fiend' src='https://cdn.legiontd2.com/Icons/Fiend.png'></div>
 </div>
 </div>
-<div class="row filterDiv gargoyle_unit_id ranger_unit_id consort_unit_id"><h3>24 – Game ID: 32d6a8f1f989b18c80c68479b3ab4b91b98897a691b84206ee92f83b666c6595</h3><p>Anhedonia2 // Normal // Fiesta // 2023-12-07 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>20%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:280.0px; left:40.0px;'></div>
+<div class="row filterDiv gargoyle_unit_id consort_unit_id ranger_unit_id"><h3>24 – Game ID: 32d6a8f1f989b18c80c68479b3ab4b91b98897a691b84206ee92f83b666c6595</h3><p>Anhedonia2 // Normal // Fiesta // 2023-12-07 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>20%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:280.0px; left:40.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -522,7 +549,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv devilfish_unit_id pollywog_unit_id"><h3>30 – Game ID: 195f076dda33ad6c0e451409be5992ff7954279ed97513351d5de9d1778759ba</h3><p>m0yrblek // Classic // Fiesta // 2023-12-07 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>21%</span></p><div class="column"><div class="board"><img alt="Devilfish" src='https://cdn.legiontd2.com/Icons/Devilfish.png' style='bottom:280.0px; left:0.0px;'><img alt="Pollywog" src='https://cdn.legiontd2.com/Icons/Pollywog.png' style='bottom:240.0px; left:40.0px;'><img alt="Pollywog" src='https://cdn.legiontd2.com/Icons/Pollywog.png' style='bottom:240.0px; left:0.0px;'></div>
+<div class="row filterDiv pollywog_unit_id devilfish_unit_id"><h3>30 – Game ID: 195f076dda33ad6c0e451409be5992ff7954279ed97513351d5de9d1778759ba</h3><p>m0yrblek // Classic // Fiesta // 2023-12-07 // Version v10.11.2 </p><p class="leakpercent">Total Average Leak: <span>21%</span></p><div class="column"><div class="board"><img alt="Devilfish" src='https://cdn.legiontd2.com/Icons/Devilfish.png' style='bottom:280.0px; left:0.0px;'><img alt="Pollywog" src='https://cdn.legiontd2.com/Icons/Pollywog.png' style='bottom:240.0px; left:40.0px;'><img alt="Pollywog" src='https://cdn.legiontd2.com/Icons/Pollywog.png' style='bottom:240.0px; left:0.0px;'></div>
 <p class="leakpercent">Wave 1: <span>25%</span></p><p class="buildtext">Devilfish, Pollywog, Pollywog</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -550,7 +577,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv bazooka_unit_id zeus_unit_id pollywog_unit_id"><h3>32 – Game ID: 3a231e53900c72bfa62880e130326b147f5657baaabf9f790f1e1b49247d70fb</h3><p>ForFunPlayer // Normal // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>22%</span></p><div class="column"><div class="board"><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:360.0px; left:0.0px;'><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:320.0px; left:80.0px;'><img alt="Pollywog" src='https://cdn.legiontd2.com/Icons/Pollywog.png' style='bottom:280.0px; left:320.0px;'></div>
+<div class="row filterDiv pollywog_unit_id bazooka_unit_id zeus_unit_id"><h3>32 – Game ID: 3a231e53900c72bfa62880e130326b147f5657baaabf9f790f1e1b49247d70fb</h3><p>ForFunPlayer // Normal // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>22%</span></p><div class="column"><div class="board"><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:360.0px; left:0.0px;'><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:320.0px; left:80.0px;'><img alt="Pollywog" src='https://cdn.legiontd2.com/Icons/Pollywog.png' style='bottom:280.0px; left:320.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Bazooka, Bazooka, Pollywog</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -564,7 +591,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv honeyflower_unit_id buzz_unit_id consort_unit_id"><h3>33 – Game ID: 0f39f972feb6d0bd36ede2c5f56dd3b799ef50ac3a57e154bf6ff7763731abac</h3><p>CrustyWeiner // Normal // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>18%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:60.0px; left:0.0px;'></div>
+<div class="row filterDiv buzz_unit_id honeyflower_unit_id consort_unit_id"><h3>33 – Game ID: 0f39f972feb6d0bd36ede2c5f56dd3b799ef50ac3a57e154bf6ff7763731abac</h3><p>CrustyWeiner // Normal // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>18%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:60.0px; left:0.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -580,7 +607,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Dragon turtle' src='https://cdn.legiontd2.com/Icons/DragonTurtle.png'></div>
 </div>
 </div>
-<div class="row filterDiv seraphin_unit_id ranger_unit_id buzz_unit_id consort_unit_id"><h3>34 – Game ID: 5cbe944526798946518648228a30e2df8a519da0888c85e89a23d5a263a55052</h3><p>Lwon // Normal // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>23%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:0.0px;'></div>
+<div class="row filterDiv buzz_unit_id consort_unit_id ranger_unit_id seraphin_unit_id"><h3>34 – Game ID: 5cbe944526798946518648228a30e2df8a519da0888c85e89a23d5a263a55052</h3><p>Lwon // Normal // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>23%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:0.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -597,7 +624,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv harpy_unit_id nekomata_unit_id"><h3>35 – Game ID: 390f47623901c5f1c1f25ed613837174e348b1e29fa238dcef9bfccc7ac6293d</h3><p>Dezilok // Normal // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>15%</span></p><div class="column"><div class="board"><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:360.0px; left:0.0px;'><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:360.0px; left:320.0px;'></div>
+<div class="row filterDiv nekomata_unit_id harpy_unit_id"><h3>35 – Game ID: 390f47623901c5f1c1f25ed613837174e348b1e29fa238dcef9bfccc7ac6293d</h3><p>Dezilok // Normal // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>15%</span></p><div class="column"><div class="board"><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:360.0px; left:0.0px;'><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:360.0px; left:320.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Nekomata 0, Nekomata 0</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -641,7 +668,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv ranger_unit_id wileshroom_unit_id windhawk_unit_id golden_buckler_unit_id"><h3>38 – Game ID: ba673015f299a1233e6c3c4dfa5aee37a15f36d2719007984cb032b6ba06164a</h3><p>Seymur // Classic // Castle // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>18%</span></p><div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:280.0px; left:40.0px;'></div>
+<div class="row filterDiv golden_buckler_unit_id ranger_unit_id wileshroom_unit_id windhawk_unit_id"><h3>38 – Game ID: ba673015f299a1233e6c3c4dfa5aee37a15f36d2719007984cb032b6ba06164a</h3><p>Seymur // Classic // Castle // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>18%</span></p><div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:280.0px; left:40.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Windhawk</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -656,7 +683,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Lizard' src='https://cdn.legiontd2.com/Icons/Lizard.png'></div>
 </div>
 </div>
-<div class="row filterDiv buzz_unit_id consort_unit_id aqua_spirit_unit_id"><h3>39 – Game ID: 953cb606e90dfdbc1bb51c80896f04f38e70d2142f285c3d9fd40777ff08faf4</h3><p>Assobot // Classic // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>25%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:200.0px; left:0.0px;'></div>
+<div class="row filterDiv aqua_spirit_unit_id buzz_unit_id consort_unit_id"><h3>39 – Game ID: 953cb606e90dfdbc1bb51c80896f04f38e70d2142f285c3d9fd40777ff08faf4</h3><p>Assobot // Classic // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>25%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:200.0px; left:0.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -670,7 +697,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv nekomata_unit_id looter_unit_id"><h3>40 – Game ID: 53abd27cc51eb64ab6b30017a4350f3655ba25abce067ff2914c459f720f7ba5</h3><p>Hampster // Classic // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>18%</span></p><div class="column"><div class="board"><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:400.0px; left:140.0px;'><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:400.0px; left:180.0px;'></div>
+<div class="row filterDiv looter_unit_id nekomata_unit_id"><h3>40 – Game ID: 53abd27cc51eb64ab6b30017a4350f3655ba25abce067ff2914c459f720f7ba5</h3><p>Hampster // Classic // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>18%</span></p><div class="column"><div class="board"><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:400.0px; left:140.0px;'><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:400.0px; left:180.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Nekomata 0, Nekomata 0</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -684,7 +711,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Lizard' src='https://cdn.legiontd2.com/Icons/Lizard.png'></div>
 </div>
 </div>
-<div class="row filterDiv gargoyle_unit_id seedling_unit_id bazooka_unit_id chloropixie_unit_id"><h3>41 – Game ID: 80635027bfa65518a0fbe453981bd96ca34d6b9d4eef9b864db0461e1dc213fc</h3><p>QueQ- // Classic // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>26%</span></p><div class="column"><div class="board"><img alt="Chloropixie" src='https://cdn.legiontd2.com/Icons/Chloropixie.png' style='bottom:520.0px; left:0.0px;'><img alt="Seedling" src='https://cdn.legiontd2.com/Icons/Seedling.png' style='bottom:520.0px; left:320.0px;'></div>
+<div class="row filterDiv chloropixie_unit_id seedling_unit_id bazooka_unit_id gargoyle_unit_id"><h3>41 – Game ID: 80635027bfa65518a0fbe453981bd96ca34d6b9d4eef9b864db0461e1dc213fc</h3><p>QueQ- // Classic // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>26%</span></p><div class="column"><div class="board"><img alt="Chloropixie" src='https://cdn.legiontd2.com/Icons/Chloropixie.png' style='bottom:520.0px; left:0.0px;'><img alt="Seedling" src='https://cdn.legiontd2.com/Icons/Seedling.png' style='bottom:520.0px; left:320.0px;'></div>
 <p class="leakpercent">Wave 1: <span>25%</span></p><p class="buildtext">Chloropixie, Seedling</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -699,7 +726,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv buzz_unit_id consort_unit_id pollywog_unit_id"><h3>42 – Game ID: 331453c50f5b40ec580c38a591680ce117eed4abb4e84b8d79e3d2049cbe4149</h3><p>Legiondary // Classic // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>20%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:320.0px;'></div>
+<div class="row filterDiv pollywog_unit_id buzz_unit_id consort_unit_id"><h3>42 – Game ID: 331453c50f5b40ec580c38a591680ce117eed4abb4e84b8d79e3d2049cbe4149</h3><p>Legiondary // Classic // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>20%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:320.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -712,7 +739,7 @@
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
-<div class="row filterDiv buzz_unit_id consort_unit_id aqua_spirit_unit_id"><h3>43 – Game ID: d52c261958ba8501cd6892aab9a5233d159ccd79a5a82f90f02d8c5ef9ec6c90</h3><p>2dinos1snail // Classic // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>25%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:300.0px; left:0.0px;'></div>
+<div class="row filterDiv aqua_spirit_unit_id buzz_unit_id consort_unit_id"><h3>43 – Game ID: d52c261958ba8501cd6892aab9a5233d159ccd79a5a82f90f02d8c5ef9ec6c90</h3><p>2dinos1snail // Classic // Fiesta // 2023-12-08 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>25%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:300.0px; left:0.0px;'></div>
 <p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
 <div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
 </div>
@@ -724,6 +751,255 @@
 <p class="leakpercent">Wave 3: <span>33%</span></p><p class="buildtext">Consort, Buzz, Aqua, Aqua, Buzz</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
 </div>
 <div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv seadragon_unit_id slime_larva_unit_id proton_unit_id windhawk_unit_id"><h3>44 – Game ID: 6231c11e085e4f05263c891059fa54c614b3d2b6934e60a622d6242fb0ccc5d7</h3><p>Cliffkill // Normal // Fiesta // 2023-12-09 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>22%</span></p><div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:200.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Windhawk</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:200.0px; left:0.0px;'><img alt="Slime" src='https://cdn.legiontd2.com/Icons/SlimeLarva.png' style='bottom:200.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 2: <span>17%</span></p><p class="buildtext">Windhawk, Slime</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:200.0px; left:0.0px;'><img alt="Slime" src='https://cdn.legiontd2.com/Icons/SlimeLarva.png' style='bottom:200.0px; left:320.0px;'><img alt="Seadragon" src='https://cdn.legiontd2.com/Icons/Seadragon.png' style='bottom:340.0px; left:0.0px;'><img alt="Proton" src='https://cdn.legiontd2.com/Icons/Proton.png' style='bottom:300.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 3: <span>33%</span></p><p class="buildtext">Windhawk, Slime, Seadragon, Proton</p><div class="sends"><p>Sends Received:</p><img alt='Dragon turtle' src='https://cdn.legiontd2.com/Icons/DragonTurtle.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv pollywog_unit_id slime_larva_unit_id windhawk_unit_id"><h3>45 – Game ID: 6452b43505d2306dee48cd3a451344b2f234f54dd6cd4482c072db7d25b27b6b</h3><p>Droctorgonopus // Normal // Fiesta // 2023-12-09 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>25%</span></p><div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:160.0px; left:80.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Windhawk</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:160.0px; left:80.0px;'><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:160.0px; left:240.0px;'></div>
+<p class="leakpercent">Wave 2: <span>25%</span></p><p class="buildtext">Windhawk, Windhawk</p><div class="sends"><p>Sends Received:</p><img alt='Dragon turtle' src='https://cdn.legiontd2.com/Icons/DragonTurtle.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:160.0px; left:80.0px;'><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:160.0px; left:240.0px;'><img alt="Pollywog" src='https://cdn.legiontd2.com/Icons/Pollywog.png' style='bottom:140.0px; left:40.0px;'><img alt="Slime" src='https://cdn.legiontd2.com/Icons/SlimeLarva.png' style='bottom:160.0px; left:320.0px;'><img alt="Pollywog" src='https://cdn.legiontd2.com/Icons/Pollywog.png' style='bottom:160.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 3: <span>33%</span></p><p class="buildtext">Windhawk, Windhawk, Pollywog, Slime, Pollywog</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+<img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv veteran_unit_id peewee_unit_id bazooka_unit_id windhawk_unit_id"><h3>46 – Game ID: 543d5a66d1cbd84d53075b5ed1dd421f33ab5bc6d9db4398935d945700bae55c</h3><p>cuwan56 // Normal // Fiesta // 2023-12-09 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>19%</span></p><div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:320.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 1: <span>8%</span></p><p class="buildtext">Windhawk</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:320.0px; left:0.0px;'><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:380.0px; left:40.0px;'><img alt="Peewee" src='https://cdn.legiontd2.com/Icons/Peewee.png' style='bottom:320.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 2: <span>17%</span></p><p class="buildtext">Windhawk, Bazooka, Peewee</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:320.0px; left:0.0px;'><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:380.0px; left:40.0px;'><img alt="Veteran" src='https://cdn.legiontd2.com/Icons/Veteran.png' style='bottom:320.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 3: <span>33%</span></p><p class="buildtext">Windhawk, Bazooka, Veteran</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+<img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv buzz_unit_id bazooka_unit_id consort_unit_id"><h3>47 – Game ID: 6d5e735b984343e623634fe23aa437e0979bf83fc2c02c0c6b1598f3cbb30d41</h3><p>Piwh // Normal // Fiesta // 2023-12-09 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>23%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:160.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:160.0px; left:0.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:160.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 2: <span>25%</span></p><p class="buildtext">Consort, Buzz</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:160.0px; left:0.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:160.0px; left:320.0px;'><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:400.0px; left:0.0px;'><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:380.0px; left:40.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:240.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 3: <span>28%</span></p><p class="buildtext">Consort, Buzz, Bazooka, Bazooka, Buzz</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv chained_fist_unit_id infiltrator_unit_id windhawk_unit_id"><h3>48 – Game ID: a59e2dc33eaa866fc310fe7801ad00b84899f84ce5a65128773cf051bb66e858</h3><p>Overpushed // Normal // Fiesta // 2023-12-09 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>15%</span></p><div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:120.0px; left:80.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Windhawk</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:120.0px; left:80.0px;'><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:160.0px; left:0.0px;'><img alt="Chained" src='https://cdn.legiontd2.com/Icons/ChainedFist.png' style='bottom:160.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 2: <span>17%</span></p><p class="buildtext">Windhawk, Windhawk, Chained</p><div class="sends"><p>Sends Received:</p><img alt='Dragon turtle' src='https://cdn.legiontd2.com/Icons/DragonTurtle.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:120.0px; left:80.0px;'><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:160.0px; left:0.0px;'><img alt="Chained" src='https://cdn.legiontd2.com/Icons/ChainedFist.png' style='bottom:160.0px; left:320.0px;'><img alt="Infiltrator" src='https://cdn.legiontd2.com/Icons/Infiltrator.png' style='bottom:100.0px; left:40.0px;'><img alt="Chained" src='https://cdn.legiontd2.com/Icons/ChainedFist.png' style='bottom:140.0px; left:280.0px;'></div>
+<p class="leakpercent">Wave 3: <span>11%</span></p><p class="buildtext">Windhawk, Windhawk, Chained, Infiltrator, Chained</p><div class="sends"><p>Sends Received:</p><img alt='Dragon turtle' src='https://cdn.legiontd2.com/Icons/DragonTurtle.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv nekomata_unit_id"><h3>49 – Game ID: 13ea1bf1d22d6a849763f32e03b7303595232089e734d7f560f6ac51744e9b50</h3><p>FishScaleKnife // Classic // Fiesta // 2023-12-09 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>19%</span></p><div class="column"><div class="board"><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:320.0px; left:0.0px;'><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:320.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Nekomata 0, Nekomata 0</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:320.0px; left:0.0px;'><img alt="Nekomata 2" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:320.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 2: <span>17%</span></p><p class="buildtext">Nekomata 0, Nekomata 2</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:320.0px; left:0.0px;'><img alt="Nekomata 2" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:320.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 3: <span>22%</span></p><p class="buildtext">Nekomata 0, Nekomata 2</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv buzz_unit_id consort_unit_id ranger_unit_id"><h3>50 – Game ID: d51c14db9355a292d347feaa9273f8be2790a39eeafff9ab6703011919aa5f04</h3><p>xxxxc // Classic // Fiesta // 2023-12-09 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>23%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:400.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:400.0px; left:0.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:400.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 2: <span>25%</span></p><p class="buildtext">Consort, Buzz</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:400.0px; left:0.0px;'><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:400.0px; left:320.0px;'><img alt="Ranger" src='https://cdn.legiontd2.com/Icons/Ranger.png' style='bottom:440.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 3: <span>28%</span></p><p class="buildtext">Consort, Consort, Ranger</p><div class="sends"><p>Sends Received:</p><img alt='Dragon turtle' src='https://cdn.legiontd2.com/Icons/DragonTurtle.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv slime_larva_unit_id peewee_unit_id masked_spirit_unit_id false_maiden_unit_id"><h3>51 – Game ID: 754a2a46c0a3bcdff9c816187b73113fc5b8e20eaef348bead0e3e2845f7e89a</h3><p>jasonjian // Normal // Yolo // 2023-12-10 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>25%</span></p><div class="column"><div class="board"><img alt="False" src='https://cdn.legiontd2.com/Icons/FalseMaiden.png' style='bottom:480.0px; left:0.0px;'><img alt="Slime" src='https://cdn.legiontd2.com/Icons/SlimeLarva.png' style='bottom:200.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">False, Slime</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="False" src='https://cdn.legiontd2.com/Icons/FalseMaiden.png' style='bottom:480.0px; left:0.0px;'><img alt="Slime" src='https://cdn.legiontd2.com/Icons/SlimeLarva.png' style='bottom:200.0px; left:0.0px;'><img alt="Masked" src='https://cdn.legiontd2.com/Icons/MaskedSpirit.png' style='bottom:440.0px; left:80.0px;'></div>
+<p class="leakpercent">Wave 2: <span>24%</span></p><p class="buildtext">False, Slime, Masked</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+<img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="False" src='https://cdn.legiontd2.com/Icons/FalseMaiden.png' style='bottom:480.0px; left:0.0px;'><img alt="Slime" src='https://cdn.legiontd2.com/Icons/SlimeLarva.png' style='bottom:200.0px; left:0.0px;'><img alt="Masked" src='https://cdn.legiontd2.com/Icons/MaskedSpirit.png' style='bottom:440.0px; left:80.0px;'><img alt="Peewee" src='https://cdn.legiontd2.com/Icons/Peewee.png' style='bottom:260.0px; left:40.0px;'><img alt="Masked" src='https://cdn.legiontd2.com/Icons/MaskedSpirit.png' style='bottom:460.0px; left:320.0px;'><img alt="Peewee" src='https://cdn.legiontd2.com/Icons/Peewee.png' style='bottom:240.0px; left:80.0px;'></div>
+<p class="leakpercent">Wave 3: <span>34%</span></p><p class="buildtext">False, Slime, Masked, Peewee, Masked, Peewee</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+<img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'></div>
+</div>
+</div>
+<div class="row filterDiv buzz_unit_id bazooka_unit_id infiltrator_unit_id windhawk_unit_id"><h3>52 – Game ID: 936f90082026f113c048ddc8af1bbdde38ac90a188ab7bb1c165149296f35a84</h3><p>LaekarN // Normal // Yolo // 2023-12-10 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>16%</span></p><div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:160.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 1: <span>8%</span></p><p class="buildtext">Windhawk</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:160.0px; left:0.0px;'><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:360.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 2: <span>8%</span></p><p class="buildtext">Windhawk, Bazooka</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:160.0px; left:0.0px;'><img alt="Bazooka" src='https://cdn.legiontd2.com/Icons/Bazooka.png' style='bottom:360.0px; left:0.0px;'><img alt="Infiltrator" src='https://cdn.legiontd2.com/Icons/Infiltrator.png' style='bottom:160.0px; left:80.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:260.0px; left:320.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:240.0px; left:280.0px;'></div>
+<p class="leakpercent">Wave 3: <span>33%</span></p><p class="buildtext">Windhawk, Bazooka, Infiltrator, Buzz, Buzz</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+<img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv buzz_unit_id sea_serpent_unit_id consort_unit_id"><h3>53 – Game ID: 5a92cb3a066b0552f2ba332ce371bf0da9d031cdf37809a4a09f61580595d7b1</h3><p>Mongkusir // Normal // Fiesta // 2023-12-10 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>25%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:280.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:280.0px; left:320.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:280.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 2: <span>25%</span></p><p class="buildtext">Consort, Buzz</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:280.0px; left:320.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:280.0px; left:0.0px;'><img alt="Sea" src='https://cdn.legiontd2.com/Icons/SeaSerpent.png' style='bottom:520.0px; left:200.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:260.0px; left:40.0px;'></div>
+<p class="leakpercent">Wave 3: <span>33%</span></p><p class="buildtext">Consort, Buzz, Sea, Buzz</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv buzz_unit_id consort_unit_id sacred_steed_unit_id"><h3>54 – Game ID: f3baca2cf17dd39ac016705c39e43c668925cc2e7599203e2d2c9bfac918c79a</h3><p>Anhedonia2 // Normal // Fiesta // 2023-12-10 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>21%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:280.0px; left:40.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:280.0px; left:40.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:280.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 2: <span>25%</span></p><p class="buildtext">Consort, Buzz</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:280.0px; left:40.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:280.0px; left:320.0px;'><img alt="Sacred" src='https://cdn.legiontd2.com/Icons/SacredSteed.png' style='bottom:240.0px; left:320.0px;'><img alt="Sacred" src='https://cdn.legiontd2.com/Icons/SacredSteed.png' style='bottom:260.0px; left:80.0px;'></div>
+<p class="leakpercent">Wave 3: <span>22%</span></p><p class="buildtext">Consort, Buzz, Sacred, Sacred</p><div class="sends"><p>Sends Received:</p><img alt='Brute' src='https://cdn.legiontd2.com/Icons/Brute.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Brute' src='https://cdn.legiontd2.com/Icons/Brute.png'></div>
+</div>
+</div>
+<div class="row filterDiv buzz_unit_id gargoyle_unit_id consort_unit_id"><h3>55 – Game ID: aa78f6b8ad7915b506de37b3799c1945b7218488d304797cb3ff8594c8dd5ba4</h3><p>P4TO // Normal // Fiesta // 2023-12-10 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>16%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:180.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:180.0px; left:320.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:180.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 2: <span>25%</span></p><p class="buildtext">Consort, Buzz</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:180.0px; left:320.0px;'><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:180.0px; left:0.0px;'><img alt="Gargoyle" src='https://cdn.legiontd2.com/Icons/Gargoyle.png' style='bottom:200.0px; left:280.0px;'></div>
+<p class="leakpercent">Wave 3: <span>6%</span></p><p class="buildtext">Consort, Consort, Gargoyle</p><div class="sends"><p>Sends Received:</p><img alt='Lizard' src='https://cdn.legiontd2.com/Icons/Lizard.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv veteran_unit_id peewee_unit_id windhawk_unit_id"><h3>56 – Game ID: 730c7992bfa3c54f23ac97e9f04a4bc5ccadc5dc92ab55cc5fad996f851cd6ab</h3><p>Jul.Foot // Normal // Fiesta // 2023-12-10 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>22%</span></p><div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:200.0px; left:80.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Windhawk</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:200.0px; left:80.0px;'><img alt="Peewee" src='https://cdn.legiontd2.com/Icons/Peewee.png' style='bottom:200.0px; left:320.0px;'><img alt="Peewee" src='https://cdn.legiontd2.com/Icons/Peewee.png' style='bottom:180.0px; left:280.0px;'></div>
+<p class="leakpercent">Wave 2: <span>17%</span></p><p class="buildtext">Windhawk, Peewee, Peewee</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:200.0px; left:80.0px;'><img alt="Veteran" src='https://cdn.legiontd2.com/Icons/Veteran.png' style='bottom:200.0px; left:320.0px;'><img alt="Peewee" src='https://cdn.legiontd2.com/Icons/Peewee.png' style='bottom:180.0px; left:280.0px;'><img alt="Peewee" src='https://cdn.legiontd2.com/Icons/Peewee.png' style='bottom:200.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 3: <span>33%</span></p><p class="buildtext">Windhawk, Veteran, Peewee, Peewee</p><div class="sends"><p>Sends Received:</p><img alt='Dragon turtle' src='https://cdn.legiontd2.com/Icons/DragonTurtle.png'>
+<img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv pollywog_unit_id aqua_spirit_unit_id nekomata_unit_id"><h3>57 – Game ID: bf69792c910e102985fc9902b49b7246b67b027a06d5432e631e4ac6c294daf3</h3><p>Maguiresucks // Normal // Fiesta // 2023-12-10 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>21%</span></p><div class="column"><div class="board"><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:360.0px; left:80.0px;'><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:360.0px; left:240.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Nekomata 0, Nekomata 0</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:360.0px; left:80.0px;'><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:360.0px; left:240.0px;'><img alt="Pollywog" src='https://cdn.legiontd2.com/Icons/Pollywog.png' style='bottom:280.0px; left:80.0px;'></div>
+<p class="leakpercent">Wave 2: <span>25%</span></p><p class="buildtext">Nekomata 0, Nekomata 0, Pollywog</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:360.0px; left:80.0px;'><img alt="Nekomata 0" src='https://cdn.legiontd2.com/Icons/Nekomata.png' style='bottom:360.0px; left:240.0px;'><img alt="Pollywog" src='https://cdn.legiontd2.com/Icons/Pollywog.png' style='bottom:280.0px; left:80.0px;'><img alt="Aqua" src='https://cdn.legiontd2.com/Icons/AquaSpirit.png' style='bottom:280.0px; left:40.0px;'><img alt="Pollywog" src='https://cdn.legiontd2.com/Icons/Pollywog.png' style='bottom:280.0px; left:240.0px;'></div>
+<p class="leakpercent">Wave 3: <span>22%</span></p><p class="buildtext">Nekomata 0, Nekomata 0, Pollywog, Aqua, Pollywog</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv slime_larva_unit_id slime_siren_unit_id windhawk_unit_id"><h3>58 – Game ID: 4426ffe40cc75602557e1b5cb7f0be6cad64ce4f8829cefa47f4b2d9fac06a3b</h3><p>Bartimaeus // Classic // Fiesta // 2023-12-10 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>15%</span></p><div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:240.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 1: <span>8%</span></p><p class="buildtext">Windhawk</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:240.0px; left:0.0px;'><img alt="Slime" src='https://cdn.legiontd2.com/Icons/SlimeLarva.png' style='bottom:220.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 2: <span>25%</span></p><p class="buildtext">Windhawk, Slime</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Windhawk" src='https://cdn.legiontd2.com/Icons/Windhawk.png' style='bottom:240.0px; left:0.0px;'><img alt="Slime" src='https://cdn.legiontd2.com/Icons/SlimeSiren.png' style='bottom:220.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 3: <span>13%</span></p><p class="buildtext">Windhawk, Slime</p><div class="sends"><p>Sends Received:</p><img alt='Lizard' src='https://cdn.legiontd2.com/Icons/Lizard.png'>
+<img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Lizard' src='https://cdn.legiontd2.com/Icons/Lizard.png'></div>
+</div>
+</div>
+<div class="row filterDiv buzz_unit_id consort_unit_id"><h3>59 – Game ID: 8a94d9d94330beace0d2c27b416d6cdcda116e15b57821649d15b91bc322f11b</h3><p>LogicalLlama // Classic // Fiesta // 2023-12-10 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>23%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:320.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:200.0px; left:0.0px;'></div>
+<p class="leakpercent">Wave 2: <span>25%</span></p><p class="buildtext">Consort, Buzz</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:240.0px; left:320.0px;'><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:200.0px; left:0.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:200.0px; left:240.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:160.0px; left:80.0px;'></div>
+<p class="leakpercent">Wave 3: <span>28%</span></p><p class="buildtext">Consort, Consort, Buzz, Buzz</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
+</div>
+</div>
+<div class="row filterDiv buzz_unit_id gargoyle_unit_id consort_unit_id"><h3>60 – Game ID: 9ce8ec8cf8d9d597315a20969012832f15d83380d592148b09d79c6ec9bebaa0</h3><p>Legiondary // Classic // Fiesta // 2023-12-10 // Version v10.11.3 </p><p class="leakpercent">Total Average Leak: <span>18%</span></p><div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:400.0px; left:320.0px;'></div>
+<p class="leakpercent">Wave 1: <span>17%</span></p><p class="buildtext">Consort</p><div class="sends"><p>Sends Received:</p></div>
+<div class ="leaks"><p>Leaks:</p><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'><img alt='Crab' src='https://cdn.legiontd2.com/Icons/Crab.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:400.0px; left:320.0px;'><img alt="Buzz" src='https://cdn.legiontd2.com/Icons/Buzz.png' style='bottom:400.0px; left:0.0px;'><img alt="Gargoyle" src='https://cdn.legiontd2.com/Icons/Gargoyle.png' style='bottom:380.0px; left:280.0px;'></div>
+<p class="leakpercent">Wave 2: <span>25%</span></p><p class="buildtext">Consort, Buzz, Gargoyle</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'><img alt='Wale' src='https://cdn.legiontd2.com/Icons/Wale.png'></div>
+</div>
+<div class="column"><div class="board"><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:400.0px; left:320.0px;'><img alt="Consort" src='https://cdn.legiontd2.com/Icons/Consort.png' style='bottom:400.0px; left:0.0px;'><img alt="Gargoyle" src='https://cdn.legiontd2.com/Icons/Gargoyle.png' style='bottom:380.0px; left:280.0px;'></div>
+<p class="leakpercent">Wave 3: <span>11%</span></p><p class="buildtext">Consort, Consort, Gargoyle</p><div class="sends"><p>Sends Received:</p><img alt='Snail' src='https://cdn.legiontd2.com/Icons/Snail.png'>
+</div>
+<div class ="leaks"><p>Leaks:</p><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'><img alt='Hopper' src='https://cdn.legiontd2.com/Icons/Hopper.png'></div>
 </div>
 </div>
 </body></html>
