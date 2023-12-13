@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+h3, p {
+    margin: 1em 0;
+}
+
+p {
+    font-size: 14px;
+}
+
+body { 
+    font-family: 'Open Sans', sans-serif;
+    padding: 1.5em;
+}
+
+#btn-container {
+    max-width: 1200px;
+    padding: 1em 0;
+}
+
+.btn {
+    width:40px;
+    height:40px;
+    display: inline;
+    vertical-align: middle;
+    border: none;
+    margin: 5px;
+    background:none;
+}
+
+.all {
+    border: 5px solid transparent;
+    background: #04AA6D;
+    color: white;
+}
+
+.btn, .all {
+    outline: 5px solid transparent;
+    display: inline;
+}
+
+.active, .all .active {
+    outline: 5px solid #87f94c;
+}
+
+.btn:hover, .all:hover{
+    outline: 5px solid #f4ce34;
+}
+
+.board {
+    position:relative;
+    border:1px solid grey;
+    background-image:
+    repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
+    repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%);
+}
+
+.sends {
+    height: 70px;
+    margin-bottom: 25px;
+}
+
+.leaks {
+    height: 70px;
+    margin-bottom: 25px;
+}
+
+.board img {
+    display:block;
+    margin:0;
+    padding:0;
+    position:absolute;
+
+}
+
+.column {
+    float: left;
+    margin-right:20px;
+    width: 400px;
+    }
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.row {
+    border-bottom: 1px solid #1b1b1b;
+    margin: 0em 1em;
+    transition: transform 0.7s ease-in-out;
+}
+
+.leakpercent {
+    font-size: 14px;
+}
+
+.leakpercent span {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.filterDiv {
+    display: none;
+}
+
+.show {
+    display: block;
+}
