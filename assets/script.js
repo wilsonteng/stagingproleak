@@ -1,5 +1,6 @@
 let btnContainer;
 let btns;
+
 window.addEventListener('DOMContentLoaded', function() {
     // Add active class to the current button (highlight it)
     var btnContainer = document.getElementById("btn-container");
