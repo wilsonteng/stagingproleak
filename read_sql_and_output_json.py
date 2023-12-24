@@ -69,7 +69,7 @@ def sql_query_to_list():
     cnx = connect_to_mysql(mysql_config)
     cursor = cnx.cursor()
 
-    query = ("SELECT * FROM match_data ")
+    query = ("SELECT * FROM match_data ORDER BY BUILD_ID desc")
 
     cursor.execute(query)
     total_list = []
