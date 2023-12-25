@@ -40,22 +40,17 @@ var css = `img { width: ${baseWidth}px;}
     style = document.createElement('style');
 
 head.appendChild(style);
-
 style.appendChild(document.createTextNode(css));
 
 
 fetch(
     "https://proleak.wilsonteng.com/assets/unit_dictionary.json"
 ).then(async (response) => {
-    unit_dictionary = await response.json();
+    unitDictionary = await response.json();
     fetch(
         "https://proleak.wilsonteng.com/assets/data.json"
     ).then(async (response) => {
-
         postsData = await response.json();
-        postsData.map((post) => createPost(post));
-        postCount.innerText = postsData.length;
-
 
         categoriesData = [
             ...new Set(
@@ -67,6 +62,8 @@ fetch(
 
         createClearButton();
         categoriesData.map((category) => createFilter("categories", category, categoriesContainer));
+
+        refreshPosts();
     });
 });
 
@@ -237,7 +234,6 @@ function refreshPosts() {
         if (checkFilter(post)) {
             filteredPosts.push(post);
         }
-
     });
 
     postCount.innerText = filteredPosts.length;
@@ -253,7 +249,7 @@ function refreshPosts() {
 
 function get_unit_image(input) {
 
-    iconpath = unit_dictionary[input].iconPath;
+    iconpath = unitDictionary[input].iconPath;
     let unit_image = `https://cdn.legiontd2.com/${iconpath}`;
     return unit_image;
 }
@@ -289,5 +285,4 @@ function calculateLeakPercentage(input) {
 
     }
     return leakPercentages;
-
 }
