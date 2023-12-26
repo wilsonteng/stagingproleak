@@ -100,6 +100,7 @@ const createPost = (postData) => {
         column.className = "column";
         board = document.createElement("div");
         board.className = "board";
+        
         for (var unit of buildPerWave[waveNumber]) {
             image = document.createElement("img");
 
@@ -113,7 +114,9 @@ const createPost = (postData) => {
             column.append(board);
         }
 
-        column.append(Object.assign(document.createElement('p'), {
+        columnText = document.createElement("div")
+        columnText.className = "columnText"
+        columnText.append(Object.assign(document.createElement('p'), {
             className: "leakpercent",
             innerHTML: `Wave ${waveNumber + 1}: <span>${totalAverageLeak}%</span>`
         }));
@@ -131,7 +134,7 @@ const createPost = (postData) => {
                 src: sendImage
             }));
         }
-        column.append(sends);
+        columnText.append(sends);
 
         leaks = document.createElement("div");
         leaks.className = "leaks";
@@ -145,7 +148,8 @@ const createPost = (postData) => {
                 src: leakImage
             }));
         }
-        column.append(leaks);
+        columnText.append(leaks);
+        column.append(columnText)
 
         row.append(column);
 

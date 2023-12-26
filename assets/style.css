@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
 }
+
 h3, p {
     margin: 1em 0;
 }
@@ -13,15 +14,6 @@ p {
 body { 
     font-family: 'Open Sans', sans-serif;
     padding: 1.5em;
-}
-
-.container { 
-    margin: 1em;
-}
-
-#post-categories {
-    max-width: 1200px;
-    padding: 1em 0;
 }
 
 .filter-button {
@@ -40,12 +32,7 @@ body {
     color: white;
 }
 
-.filter-button, .all {
-    outline: 5px solid transparent;
-    display: inline;
-}
-
-.is-active, .all .active {
+.is-active {
     outline: 5px solid #87f94c;
 }
 
@@ -81,9 +68,18 @@ body {
 
 .column {
     float: left;
-    margin-right:20px;
-    width: 400px;
+    margin-right:40px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     }
+
+.columnText {
+    padding: 1em;
+}
+
+.row h3 {
+    overflow-wrap: break-word;
+    margin: 0 0 1em 0;
+}
 
 .row:after {
     content: "";
@@ -92,23 +88,14 @@ body {
 }
 
 .row {
-    border-bottom: 1px solid #1b1b1b;
-    transition: transform 0.7s ease-in-out;
-}
-
-.leakpercent {
-    font-size: 14px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 1em;
+    max-width: 1300px;
+    margin-bottom: 1em;
 }
 
 .leakpercent span {
     font-size: 36px;
     font-weight: 700;
-}
-
-.filterDiv {
-    display: none;
-}
-
-.show {
-    display: block;
 }
