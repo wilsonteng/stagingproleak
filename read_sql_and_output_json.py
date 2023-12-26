@@ -100,7 +100,7 @@ with open('assets/data.json', 'w') as f:
 
 date_utc = datetime.strftime(datetime.utcnow(), '%Y-%m-%d at %H:%M:%S UTC')
 
-with open('assets/date_utc.json', 'w') as f:
+with open('assets/date_created.json', 'w') as f:
     json.dump(date_utc, f)
 
 print("File written at assets/data.json")

@@ -43,11 +43,11 @@ head.appendChild(style);
 style.appendChild(document.createTextNode(css));
 
 fetch(
-    "https://proleak.wilsonteng.com/assets/date_utc.json"
+    "https://proleak.wilsonteng.com/assets/date_created.json"
 ).then(async (response) => {
     date_utc = await response.json();
     dateCreated = document.querySelector("#date-created");
-    dateCreated.innerText = date_utc;
+    dateCreated.innerText = `Last Updated On ${date_utc} by Wilson Teng`;
 });
 
 
