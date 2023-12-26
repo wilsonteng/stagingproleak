@@ -1,6 +1,29 @@
+body {
+    background-color: black;
+    color: white;
+  }
+
+@media screen and (prefers-color-scheme: light) {
+body {
+    background-color: white;
+    color: black;
+}
+}
+
 * {
     margin: 0;
     padding: 0;
+}
+
+main { 
+    width:1200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-size: 36px;
 }
 
 h3, p {
@@ -24,6 +47,7 @@ body {
     border: none;
     margin: 5px;
     background:none;
+    transition: 0.2s;
 }
 
 .all {
@@ -42,10 +66,9 @@ body {
 
 .board {
     position:relative;
-    border:1px solid grey;
     background-image:
-    repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
-    repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%);
+    repeating-linear-gradient(rgb(38, 38, 38) 0 1px, transparent 1px 100%),
+    repeating-linear-gradient(90deg, rgb(38, 38, 38) 0 1px, transparent 1px 100%);
 }
 
 .sends {
@@ -68,12 +91,15 @@ body {
 
 .column {
     float: left;
-    margin-right:40px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin: 0 2em 2em 0;
     }
 
 .columnText {
-    padding: 1em;
+    padding: 1em 0 ;
+}
+
+div.row > div:nth-child(6) {
+    margin: 0 0 2em 0;
 }
 
 .row h3 {
@@ -88,11 +114,10 @@ body {
 }
 
 .row {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
     padding: 1em;
-    max-width: 1300px;
     margin-bottom: 1em;
+    border: 1px solid rgb(38, 38, 38);
+    border-radius: 5px;
 }
 
 .leakpercent span {

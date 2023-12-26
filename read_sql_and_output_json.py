@@ -98,4 +98,9 @@ data = sql_query_to_list()
 with open('assets/data.json', 'w') as f:
     json.dump(data, f)
 
+date_utc = datetime.strftime(datetime.utcnow(), '%Y-%m-%d at %H:%M:%S UTC')
+
+with open('assets/date_utc.json', 'w') as f:
+    json.dump(date_utc, f)
+
 print("File written at assets/data.json")

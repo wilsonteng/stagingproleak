@@ -31,8 +31,8 @@ const baseWidth = 40;
 var css = `img { width: ${baseWidth}px;}
 
   .board {
-    height: ${14 * baseWidth}px;
-    width: ${9 * baseWidth}px;
+    height: ${14 * baseWidth + 1}px;
+    width: ${9 * baseWidth + 1}px;
     background-size: ${baseWidth}px ${baseWidth}px;
   }
   `,
@@ -41,6 +41,14 @@ var css = `img { width: ${baseWidth}px;}
 
 head.appendChild(style);
 style.appendChild(document.createTextNode(css));
+
+fetch(
+    "https://proleak.wilsonteng.com/assets/date_utc.json"
+).then(async (response) => {
+    date_utc = await response.json();
+    dateCreated = document.querySelector("#date-created");
+    dateCreated.innerText = date_utc;
+});
 
 
 fetch(
