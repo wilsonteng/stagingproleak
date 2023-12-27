@@ -126,7 +126,7 @@ const createPost = (postData) => {
         columnText.className = "columnText"
         columnText.append(Object.assign(document.createElement('p'), {
             className: "leakpercent",
-            innerHTML: `Wave ${waveNumber + 1}: <span>${totalAverageLeak}%</span>`
+            innerHTML: `Wave ${waveNumber + 1}: <span>${leakPercentages[waveNumber]}%</span>`
         }));
 
 

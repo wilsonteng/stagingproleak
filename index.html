@@ -20,12 +20,24 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
   </head>
-  <body>
 
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-22HX5J2BY6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-22HX5J2BY6');
+  </script>
+
+
+  <body>
     <main>
       <div id="date-created"><span id="date-created"></span></div>
       <h1> LTD Proleak Finder</h1>
-      <div id="post-categories" class="row filter-containerr"><h3>Filters</h3></div>
+      <div id="post-categories" class="row filter-container tooltip"><h3 class="">Filters</h3><span class="tooltiptext">Program will display builds that contain all filter selections. Clear button will reset all selections</span></div>
       <div id="post-level" class="filter-container"></div>
       <div class="container">Builds Found (<span id="post-count"></span>)<p id="no-results"></p></div>
       <div id="posts-container"></div>
