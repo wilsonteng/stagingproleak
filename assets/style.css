@@ -16,13 +16,13 @@ main {
 }
 
 a {
-    color: rgb(0, 149, 246);
+    color: #fff;
+    text-decoration: none;
 }
 
 a:hover {
     background: #cdfeaa;
     color: #111;
-    text-decoration: none;
   }
 
 h1 {
