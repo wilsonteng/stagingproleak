@@ -3,25 +3,6 @@ var currentFilters = {
     categories: new Set(),
 };
 
-var wave_values = {
-    1: 72,
-    2: 84,
-    3: 90
-};
-
-var unit_leak_dictionary = {
-    "Crab": 6,
-    "Wale": 7,
-    "Hopper": 5,
-    "Snail": 6,
-    "Dragon Turtle": 12,
-    "Lizard": 12,
-    "Brute": 15,
-    "Fiend": 18,
-    "Hermit": 20,
-    "Dino": 24
-};
-
 const postsContainer = document.querySelector("#posts-container");
 const categoriesContainer = document.querySelector("#post-categories");
 const postCount = document.querySelector("#post-count");
@@ -231,11 +212,11 @@ function checkFilter(post) {
     }
 
     for (var filterUnit of currentFilters.categories) {
-        if (!post.categories.includes(filterUnit)) {
-            return false;
+        if (post.categories.includes(filterUnit)) {
+            return true;
         }
     }
-    return true;
+    return false;
 
 }
 
@@ -285,6 +266,26 @@ function parse_unit_string_to_plot(input) {
 }
 
 function calculateLeakPercentage(input) {
+    
+    var wave_values = {
+        1: 72,
+        2: 84,
+        3: 90
+    };
+
+    var unit_leak_dictionary = {
+        "Crab": 6,
+        "Wale": 7,
+        "Hopper": 5,
+        "Snail": 6,
+        "Dragon Turtle": 12,
+        "Lizard": 12,
+        "Brute": 15,
+        "Fiend": 18,
+        "Hermit": 20,
+        "Dino": 24
+    };
+
     leakPercentages = [];
 
     for (let waveNumber = 0; waveNumber < input.length; waveNumber++) {

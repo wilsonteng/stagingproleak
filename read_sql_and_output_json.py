@@ -129,10 +129,10 @@ def sql_query_to_list():
 
 data = sql_query_to_list()
 
-def Average(lst): 
-    return sum(lst) / len(lst) 
+def calculate_average(arr): 
+    return sum(arr) / len(arr) 
 
-sorted_data = sorted(data, key = lambda row : Average(row["leakPercentages"]) )
+sorted_data = sorted(data, key = lambda row : calculate_average(row["leakPercentages"]) )
 
 with open('assets/data.json', 'w') as f:
     json.dump(sorted_data, f)
