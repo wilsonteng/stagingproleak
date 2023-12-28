@@ -47,7 +47,7 @@ fetch(
 ).then(async (response) => {
     date_utc = await response.json();
     dateCreated = document.querySelector("#date-created");
-    dateCreated.innerText = `Last Updated On ${date_utc} by Wilson Teng`;
+    dateCreated.innerText = `Data Last Collected On ${date_utc} by Wilson Teng`;
 });
 
 

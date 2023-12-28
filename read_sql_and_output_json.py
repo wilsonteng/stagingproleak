@@ -20,6 +20,25 @@ mysql_config = {
     'raise_on_warnings': True
     }
 
+wave_values = {
+    1 : 72,
+    2 : 84,
+    3 : 90,
+}
+
+unit_leak_dictionary = {
+    "Crab" : 6,
+    "Wale" : 7,
+    "Hopper" : 5,
+    "Snail" : 6,
+    "Dragon Turtle" : 12,
+    "Lizard" : 12,
+    "Brute" : 15,
+    "Fiend" : 18,
+    "Hermit" : 20,
+    "Dino" : 24
+}
+
 def find_units_used(input):
     units_used = set()
     for wave in input:
@@ -65,6 +84,21 @@ def connect_to_mysql(config, attempts=3, delay=2):
             attempt += 1
     return None
 
+def calculate_leak_percentages(data : list) -> int:
+    """
+    Takes in leak data and returns leak percentages as integer.
+    """
+    
+    leak_percentages = []
+    for wavenumber, wave in enumerate(data):
+        wave_leak_value = 0
+        for leaked_unit in wave:
+            wave_leak_value += unit_leak_dictionary[leaked_unit]
+            wave_leak_percent = round(wave_leak_value * 100 / wave_values[wavenumber + 1])
+        leak_percentages.append(wave_leak_percent)
+
+    return leak_percentages
+
 def sql_query_to_list():
     cnx = connect_to_mysql(mysql_config)
     cursor = cnx.cursor()
@@ -87,20 +121,20 @@ def sql_query_to_list():
         player_dict["leaksPerWave"] = ast.literal_eval(row[9])
 
         player_dict["categories"] = list(find_units_used(player_dict["buildPerWave"]))
+        player_dict["leakPercentages"] = calculate_leak_percentages(player_dict["leaksPerWave"])
 
         total_list.append(player_dict)
     
     return total_list
 
-
 data = sql_query_to_list()
 
+def Average(lst): 
+    return sum(lst) / len(lst) 
+
+sorted_data = sorted(data, key = lambda row : Average(row["leakPercentages"]) )
+
 with open('assets/data.json', 'w') as f:
-    json.dump(data, f)
-
-date_utc = datetime.strftime(datetime.utcnow(), '%Y-%m-%d at %H:%M:%S UTC')
-
-with open('assets/date_created.json', 'w') as f:
-    json.dump(date_utc, f)
+    json.dump(sorted_data, f)
 
 print("File written at assets/data.json")

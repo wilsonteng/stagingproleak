@@ -171,4 +171,9 @@ def main():
     api_call_loop("Normal")
     api_call_loop("Classic")
 
+    # write date created to json file
+    date_utc = datetime.strftime(datetime.utcnow(), '%Y-%m-%d at %H:%M:%S UTC')
+    with open('assets/date_created.json', 'w') as f:
+        json.dump(date_utc, f)
+
 main()
