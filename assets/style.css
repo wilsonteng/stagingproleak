@@ -3,13 +3,6 @@ body {
     color: white;
   }
 
-@media screen and (prefers-color-scheme: light) {
-body {
-    background-color: white;
-    color: black;
-}
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -21,6 +14,16 @@ main {
     margin-left: auto;
     margin-right: auto;
 }
+
+a {
+    color: rgb(0, 149, 246);
+}
+
+a:hover {
+    background: #cdfeaa;
+    color: #111;
+    text-decoration: none;
+  }
 
 h1 {
     font-size: 36px;

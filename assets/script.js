@@ -28,7 +28,13 @@ fetch(
 ).then(async (response) => {
     date_utc = await response.json();
     dateCreated = document.querySelector("#date-created");
-    dateCreated.innerText = `Data Last Collected On ${date_utc} by Wilson Teng`;
+
+    const link = document.createElement("a");
+    link.setAttribute('href', `https://wilsonteng.com/`);
+    link.textContent = 'Wilson Teng';
+
+    dateCreated.innerText = `Data Last Collected On ${date_utc} by `;
+    dateCreated.appendChild(link)
 });
 
 
