@@ -129,7 +129,6 @@ div.row > div:nth-child(6) {
 .tooltip {
     position: relative;
     display: table;
-    border-bottom: 3px dotted rgb(38, 38, 38);
   }
   
   .tooltip .tooltiptext {
