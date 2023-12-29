@@ -1,6 +1,6 @@
 var postsData = "";
 var currentFilters = {
-    categories: new Set(),
+    categories: new Set()
 };
 
 const postsContainer = document.querySelector("#posts-container");
@@ -10,7 +10,7 @@ const noResults = document.querySelector("#no-results");
 const baseWidth = 40;
 
 var css = `img { width: ${baseWidth}px;}
-
+    .imageWrapper { width: ${baseWidth}px; height: ${baseWidth}px; }
   .board {
     height: ${14 * baseWidth + 1}px;
     width: ${9 * baseWidth + 1}px;
@@ -26,15 +26,15 @@ style.appendChild(document.createTextNode(css));
 fetch(
     "https://proleak.wilsonteng.com/assets/date_created.json"
 ).then(async (response) => {
-    date_utc = await response.json();
-    dateCreated = document.querySelector("#date-created");
+    var date_utc = await response.json();
+    var dateCreated = document.querySelector("#date-created");
 
     const link = document.createElement("a");
     link.setAttribute('href', `https://wilsonteng.com/`);
     link.textContent = 'Wilson Teng';
 
     dateCreated.innerText = `Data Last Collected On ${date_utc} by `;
-    dateCreated.appendChild(link)
+    dateCreated.appendChild(link);
 });
 
 
@@ -73,7 +73,7 @@ const createPost = (postData) => {
         buildPerWave,
         mercenariesReceivedPerWave,
         leaksPerWave,
-        categories
+        leakPercentages
     } = postData;
 
     const row = document.createElement("div");
@@ -83,47 +83,61 @@ const createPost = (postData) => {
       <p>${playerName} // ${queueType} // ${legion} // ${date} // Version ${version} </p>
   `;
 
-    leakPercentages = calculateLeakPercentage(leaksPerWave);
-    totalAverageLeak = Math.round(leakPercentages.reduce((a, b) => a + b, 0) / leakPercentages.length);
+    var totalAverageLeak = Math.round(leakPercentages.reduce((a, b) => a + b, 0) / leakPercentages.length);
     row.append(Object.assign(document.createElement('p'), {
         className: "leakpercent",
         innerHTML: `Total Average Leak: <span>${totalAverageLeak}%</span>`
     }));
 
     for (let waveNumber = 0; waveNumber < buildPerWave.length; waveNumber++) {
-        column = document.createElement("div");
+        let column = document.createElement("div");
         column.className = "column";
-        board = document.createElement("div");
+        let board = document.createElement("div");
         board.className = "board";
         
         for (var unit of buildPerWave[waveNumber]) {
-            image = document.createElement("img");
 
-            [unitUrl, x, y, upgrades] = parse_unit_string_to_plot(unit);
+            let [unitUrl, x, y, upgrades] = parse_unit_string_to_plot(unit);
+
+            let imageWrapper = document.createElement("div");
+            imageWrapper.className = "imageWrapper";
+            let image = document.createElement("img");
+            
             image.src = unitUrl;
             image.alt = unit;
-            image.style = `bottom:${y}px; left:${x}px;>`;
+            imageWrapper.style = `bottom:${y}px; left:${x}px;>`;
+            imageWrapper.append(image);
+            
+            // append upgrade number if unit is any of these
+            const upgradeableUnits = new Set(["nekomata", "infiltrator", 
+                "treant", "peewee", "veteran"]);
 
-            board.append(image);
+            if (upgradeableUnits.has(unit.split("_")[0])) { 
+                let upgradeText = document.createElement("span");
+                upgradeText.innerText = upgrades;
+                imageWrapper.append(upgradeText);
+            }
+
+            board.append(imageWrapper);
 
             column.append(board);
         }
 
-        columnText = document.createElement("div")
-        columnText.className = "columnText"
+        let columnText = document.createElement("div");
+        columnText.className = "columnText";
         columnText.append(Object.assign(document.createElement('p'), {
             className: "leakpercent",
             innerHTML: `Wave ${waveNumber + 1}: <span>${leakPercentages[waveNumber]}%</span>`
         }));
 
 
-        sends = document.createElement("div");
+        let sends = document.createElement("div");
         sends.className = "sends";
         sends.append(Object.assign(document.createElement('p'), {
             innerHTML: "Sends Received:"
         }));
         for (var send of mercenariesReceivedPerWave[waveNumber]) {
-            sendImage = get_unit_image(send);
+            let sendImage = get_unit_image(send);
             sends.append(Object.assign(document.createElement('img'), {
                 alt: send,
                 src: sendImage
@@ -131,20 +145,20 @@ const createPost = (postData) => {
         }
         columnText.append(sends);
 
-        leaks = document.createElement("div");
+        let leaks = document.createElement("div");
         leaks.className = "leaks";
         leaks.append(Object.assign(document.createElement('p'), {
             innerHTML: "Leaks:"
         }));
         for (var leak of leaksPerWave[waveNumber]) {
-            leakImage = get_unit_image(leak);
+            let leakImage = get_unit_image(leak);
             leaks.append(Object.assign(document.createElement('img'), {
                 alt: leak,
                 src: leakImage
             }));
         }
         columnText.append(leaks);
-        column.append(columnText)
+        column.append(columnText);
 
         row.append(column);
 
@@ -198,7 +212,7 @@ const handleButtonClick = (e, key, param, container) => {
 
 const clearFilters = () => {
     // turn off all the buttons
-    allButtons = document.getElementById('post-categories').children;
+    let allButtons = document.getElementById('post-categories').children;
 
     for (var button of allButtons) {
         if (button.getAttribute("data-state") == "active") {
@@ -247,8 +261,9 @@ function refreshPosts() {
 }
 
 function get_unit_image(input) {
+    // returns the image path of a unit from legiontd2's cdn
 
-    iconpath = unitDictionary[input].iconPath;
+    let iconpath = unitDictionary[input].iconPath;
     let unit_image = `https://cdn.legiontd2.com/${iconpath}`;
     return unit_image;
 }
@@ -256,52 +271,17 @@ function get_unit_image(input) {
 function parse_unit_string_to_plot(input) {
     // Takes an input string and outputs unitName, x, y as tuple. Calculates positioning of units on grid
 
-    first = input.split(":");
-    unitName = first[0];
-    upgrades = first[2];
-    second = first[1].split("|");
-    x = second[0];
-    y = second[1];
+    let first = input.split(":");
+    let unitName = first[0];
+    let upgrades = first[2];
+    let second = first[1].split("|");
+    let x = second[0];
+    let y = second[1];
 
     x = x * baseWidth - (baseWidth / 2);
     y = y * baseWidth - (baseWidth / 2);
 
-    unitUrl = get_unit_image(unitName);
+    let unitUrl = get_unit_image(unitName);
 
     return [unitUrl, x, y, upgrades];
-}
-
-function calculateLeakPercentage(input) {
-    
-    var wave_values = {
-        1: 72,
-        2: 84,
-        3: 90
-    };
-
-    var unit_leak_dictionary = {
-        "Crab": 6,
-        "Wale": 7,
-        "Hopper": 5,
-        "Snail": 6,
-        "Dragon Turtle": 12,
-        "Lizard": 12,
-        "Brute": 15,
-        "Fiend": 18,
-        "Hermit": 20,
-        "Dino": 24
-    };
-
-    leakPercentages = [];
-
-    for (let waveNumber = 0; waveNumber < input.length; waveNumber++) {
-        waveLeakValue = 0;
-        for (var leakedUnit of input[waveNumber]) {
-            waveLeakValue += unit_leak_dictionary[leakedUnit];
-            waveLeakPercent = Math.round(waveLeakValue * 100 / wave_values[waveNumber + 1]);
-        }
-        leakPercentages.push(waveLeakPercent);
-
-    }
-    return leakPercentages;
 }

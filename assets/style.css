@@ -128,3 +128,15 @@ div.row > div:nth-child(6) {
     font-size: 36px;
     font-weight: 700;
 }
+
+.imageWrapper {
+    position: absolute;
+    width: min-content;
+  }
+  
+.imageWrapper span {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background:black;
+    }
