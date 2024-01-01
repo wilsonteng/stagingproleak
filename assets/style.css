@@ -140,3 +140,7 @@ div.row > div:nth-child(6) {
     right: 0px;
     background:black;
     }
+
+#wavesToFilter {
+    width: 100px;
+}
