@@ -27,7 +27,6 @@ a:hover {
 
 h1 {
     font-size: 36px;
-    margin: 12px 0;
 }
 
 h3, p {
@@ -149,9 +148,13 @@ div.row > div:nth-child(6) {
     width: 100px;
 }
 
-.leaks img {
+.sends img, .leaks img {
     width: 1em;
     height: 1em;
+}
+
+.container {
+    padding: 0 16px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -161,8 +164,5 @@ div.row > div:nth-child(6) {
     }
     body {
         padding: 1em 0;
-    }
-    #date-created, h1, .container {
-        padding: 0 1em;
     }
   }
