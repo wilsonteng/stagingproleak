@@ -133,7 +133,8 @@ div.row > div:nth-child(6) {
 
 .imageWrapper {
     position: absolute;
-    width: min-content;
+    width: 1em;
+    height: 1em;
   }
   
 .imageWrapper span {
@@ -146,6 +147,11 @@ div.row > div:nth-child(6) {
 
 #wavesToFilter {
     width: 100px;
+}
+
+.leaks img {
+    width: 1em;
+    height: 1em;
 }
 
 @media only screen and (max-width: 600px) {
