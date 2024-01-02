@@ -10,19 +10,6 @@ const postCount = document.querySelector("#post-count");
 const noResults = document.querySelector("#no-results");
 const baseWidth = 40;
 
-var css = `img { width: ${baseWidth}px;}
-    .imageWrapper { width: ${baseWidth}px; height: ${baseWidth}px; }
-    .board {
-    height: ${14 * baseWidth + 1}px;
-    width: ${9 * baseWidth + 1}px;
-    background-size: ${baseWidth}px ${baseWidth}px;
-  }
-  `,
-	head = document.head || document.getElementsByTagName('head')[0],
-	style = document.createElement('style');
-
-head.appendChild(style);
-style.appendChild(document.createTextNode(css));
 
 fetch(
 	"https://proleak.wilsonteng.com/assets/date_created.json"
@@ -110,7 +97,7 @@ const createPost = (postData) => {
 
 			image.src = unitUrl;
 			image.alt = unit;
-			imageWrapper.style = `bottom:${y}px; left:${x}px;>`;
+			imageWrapper.style = `bottom:${y - 0.5}em; left:${x - 0.5}em;>`; // offset by 0.5 because the coordinates are where the game "centers" the unit
 			imageWrapper.append(image);
 
 			// append upgrade number if unit is any of these
@@ -320,9 +307,6 @@ function parse_unit_string_to_plot(input) {
 	let second = first[1].split("|");
 	let x = second[0];
 	let y = second[1];
-
-	x = x * baseWidth - (baseWidth / 2);
-	y = y * baseWidth - (baseWidth / 2);
 
 	let unitUrl = get_unit_image(unitName);
 
