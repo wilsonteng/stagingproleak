@@ -112,7 +112,7 @@ def sql_query_to_list():
         player_dict = {}
         player_dict["game_id"] = row[1]
         player_dict["version"] = row[2]
-        player_dict["date"] = str(row[3]) #JSON Dumps does not like datetime object
+        player_dict["date"] = str(row[3]) #json.dump does not like datetime object. Must convert to string
         player_dict["queueType"] = row[4]
         player_dict['playerName'] = row[5]
         player_dict["legion"] = row[6]
@@ -120,7 +120,7 @@ def sql_query_to_list():
         player_dict["mercenariesReceivedPerWave"] = ast.literal_eval(row[8])
         player_dict["leaksPerWave"] = ast.literal_eval(row[9])
 
-        player_dict["categories"] = list(find_units_used(player_dict["buildPerWave"]))
+        #player_dict["categories"] = list(find_units_used(player_dict["buildPerWave"]))
         player_dict["leakPercentages"] = calculate_leak_percentages(player_dict["leaksPerWave"])
 
         total_list.append(player_dict)

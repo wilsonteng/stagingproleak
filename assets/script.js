@@ -47,14 +47,18 @@ fetch(
 		"https://proleak.wilsonteng.com/assets/data.json"
 	).then(async (response) => {
 		postsData = await response.json();
+		
+		categoriesData = new Set();
 
-		categoriesData = [
-			...new Set(
-				postsData
-				.map((post) => post.categories)
-				.reduce((acc, curVal) => acc.concat(curVal), [])
-			)
-		];
+		postsData.forEach((buildData) => {
+			buildData.buildPerWave.forEach((totalBuildArray) => {
+				totalBuildArray.forEach((unit) => {
+					categoriesData.add(unit.split(":")[0])
+				});
+			});
+		});
+
+		categoriesData = Array.from(categoriesData)
 
 		createClearButton();
 		categoriesData.map((category) => createFilter("categories", category, categoriesContainer));
