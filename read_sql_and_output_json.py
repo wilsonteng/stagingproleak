@@ -108,6 +108,8 @@ def sql_query_to_list():
     cursor.execute(query)
     total_list = []
 
+    version_set = set()
+
     for row in cursor:
         player_dict = {}
         player_dict["game_id"] = row[1]
@@ -124,10 +126,11 @@ def sql_query_to_list():
         player_dict["leakPercentages"] = calculate_leak_percentages(player_dict["leaksPerWave"])
 
         total_list.append(player_dict)
+        version_set.add(row[2][:6])
     
-    return total_list
+    return total_list, version_set
 
-data = sql_query_to_list()
+data, version_set = sql_query_to_list()
 
 def calculate_average(arr): 
     return sum(arr) / len(arr) 
@@ -138,3 +141,6 @@ with open('assets/data.json', 'w') as f:
     json.dump(sorted_data, f)
 
 print("File written at assets/data.json")
+
+with open('assets/version_list.json', 'w') as f:
+    json.dump(list(version_set), f)

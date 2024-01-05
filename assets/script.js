@@ -11,6 +11,13 @@ const noResults = document.querySelector("#no-results");
 const baseWidth = 40;
 
 
+fetch("https://proleak.wilsonteng.com/assets/date_created.json"
+).then(async (response) => {
+	var version_list = await response.json();
+	console.log(version_list)
+})
+
+
 fetch(
 	"https://proleak.wilsonteng.com/assets/date_created.json"
 ).then(async (response) => {
