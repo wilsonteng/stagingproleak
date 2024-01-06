@@ -1,21 +1,15 @@
 var postsData = "";
 var currentFilters = {
 	categories: new Set(),
-	wavesToFilterFor: 3
+	wavesToFilterFor: 3,
+	versionFilters: new Set()
 };
 
 const postsContainer = document.querySelector("#posts-container");
-const categoriesContainer = document.querySelector("#post-categories");
+const categoriesContainer = document.querySelector("#filter-categories");
 const postCount = document.querySelector("#post-count");
 const noResults = document.querySelector("#no-results");
 const baseWidth = 40;
-
-
-fetch("https://proleak.wilsonteng.com/assets/date_created.json"
-).then(async (response) => {
-	var version_list = await response.json();
-	console.log(version_list)
-})
 
 
 fetch(
@@ -47,16 +41,17 @@ fetch(
 		postsData.forEach((buildData) => {
 			buildData.buildPerWave.forEach((totalBuildArray) => {
 				totalBuildArray.forEach((unit) => {
-					categoriesData.add(unit.split(":")[0])
+					categoriesData.add(unit.split(":")[0]);
 				});
 			});
 		});
 
-		categoriesData = Array.from(categoriesData)
+		categoriesData = Array.from(categoriesData);
 
 		createClearButton();
-		categoriesData.map((category) => createFilter("categories", category, categoriesContainer));
+		categoriesData.map((category) => createUnitFilter("categories", category, categoriesContainer));
 		createSlider(categoriesContainer);
+		createVersionSelector() 
 		refreshPosts();
 	});
 });
@@ -161,7 +156,6 @@ const createPost = (postData) => {
 		column.append(columnText);
 
 		row.append(column);
-
 	}
 
 	postsContainer.append(row);
@@ -179,7 +173,7 @@ const createClearButton = () => {
 	categoriesContainer.append(filterButton);
 };
 
-const createFilter = (key, param, container) => {
+const createUnitFilter = (key, param, container) => {
 	const filterButton = document.createElement("img");
 
 	filterButton.src = get_unit_image(param);
@@ -193,6 +187,31 @@ const createFilter = (key, param, container) => {
 
 	container.append(filterButton);
 };
+
+function createVersionSelector() {
+	
+	var versionContainer = document.createElement("div");
+	versionContainer.className = "versionContainer";
+
+	versionContainer.append(Object.assign(document.createElement('p'), {
+		innerHTML: "Game Versions. Selecting none will display all versions."
+	}));
+	
+	fetch("https://proleak.wilsonteng.com/assets/version_list.json"
+	).then(async (response) => {
+		var version_list = await response.json();
+		version_list.forEach((versionNumber) => {
+			var versionButton = document.createElement("div");
+			versionButton.className = "filter-button"
+			versionButton.innerText = versionNumber
+			versionButton.addEventListener("click", (e) =>
+			handleButtonClick(e, "versionFilters", versionNumber, versionContainer));
+			versionContainer.append(versionButton)
+			
+		})
+	});
+	categoriesContainer.append(versionContainer)
+}
 
 const handleButtonClick = (e, key, param, container) => {
 
@@ -210,9 +229,9 @@ const handleButtonClick = (e, key, param, container) => {
 	refreshPosts();
 };
 
-const clearFilters = () => {
+function clearFilters() {
 	// turn off all the buttons
-	let allButtons = document.getElementById('post-categories').children;
+	let allButtons = document.getElementById('filter-categories').children;
 
 	for (var button of allButtons) {
 		if (button.getAttribute("data-state") == "active") {
@@ -224,7 +243,7 @@ const clearFilters = () => {
 	// clear the keys and rebuild list
 	currentFilters.categories.clear();
 	refreshPosts();
-};
+}
 
 const createSlider = (container) => {
 	// Creates Slider Element which causes filters to only check up until specified wave number
@@ -251,19 +270,13 @@ const createSlider = (container) => {
 		currentFilters.wavesToFilterFor = parseInt(this.value);
 		refreshPosts();
 	};
-
 };
 
-function checkFilter(post, wavesToCheck) {
-	// have to write the logic for the new filters here
-
-	// TO DO: has to check # of waves based on slider
-	// Will have to use parse_build_array_to_set function and check filters against this set
+function checkFilter(post) {
+	// Checks the post build to see if the units from category filters exist in this
 	if (currentFilters.categories.size === 0) {
 		return true;
 	}
-
-	// iterate across the array x # of times
 
 	for (var i = 0; i < currentFilters.wavesToFilterFor; i++) {
 		var waveBuildData = parse_build_array_to_set(post.buildPerWave[i])
@@ -274,14 +287,27 @@ function checkFilter(post, wavesToCheck) {
 		}
 	}
 	return false;
+}
 
+function checkVersionFilters(post) {
+	if (currentFilters.versionFilters.size === 0) {
+		return true;
+	}
+
+	for (var versionFilter of currentFilters.versionFilters) {
+		if (post.version.includes(versionFilter)) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 function refreshPosts() {
 
 	const filteredPosts = [];
 	postsData.map((post) => {
-		if (checkFilter(post, 3)) {
+		if (checkFilter(post) && checkVersionFilters(post)) {
 			filteredPosts.push(post);
 		}
 	});
@@ -320,9 +346,8 @@ function parse_unit_string_to_plot(input) {
 	return [unitUrl, x, y, upgrades];
 }
 
-// need function that turns an array of units into a set of units with simple unit nmaes
-
 function parse_build_array_to_set(input) {
+	// returns a set of the units used in this build, with the coordinates removed
 	let newSet = new Set();
 
 	for (var unit of input) {
@@ -331,5 +356,5 @@ function parse_build_array_to_set(input) {
 	return newSet;
 }
 
-// need filter function to check ths set of units against the condition
-// condition is inclusve or exclusive
+
+

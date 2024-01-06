@@ -30,11 +30,11 @@ h1 {
 }
 
 h3, p {
-    margin: 1em 0;
+    margin: 0 0 1em 0;
 }
 
 p {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 body { 
@@ -53,18 +53,32 @@ body {
     transition: 0.2s;
 }
 
+.versionContainer, .sliderContainer {
+    padding: 1em 0;
+}
+
+.versionContainer .filter-button {
+    padding: 10px 20px;
+    border: 1px rgb(38, 38, 38) solid;
+}
+
 .all {
     border: 5px solid transparent;
     background: #04AA6D;
     color: white;
 }
 
-.is-active {
-    outline: 5px solid #87f94c;
+.filter-button:hover{
+    outline: 5px solid #f4ce34;
+    cursor: pointer;
 }
 
-.filter-button:hover, .all:hover{
-    outline: 5px solid #f4ce34;
+.filter-button:active {
+    outline: 5px solid #3f5488;
+}
+
+.is-active {
+    outline: 5px solid #87f94c;
 }
 
 .board {
