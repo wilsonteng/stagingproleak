@@ -306,6 +306,17 @@ function checkVersionFilters(post) {
 function refreshPosts() {
 
 	const filteredPosts = [];
+
+	postsContainer.animate(
+		[
+		  { opacity: 0 },
+		], {
+		  duration: 200,
+		  iterations: 1
+		}
+	  );
+	postsContainer.innerHTML = "";
+
 	postsData.map((post) => {
 		if (checkFilter(post) && checkVersionFilters(post)) {
 			filteredPosts.push(post);
@@ -313,7 +324,7 @@ function refreshPosts() {
 	});
 
 	postCount.innerText = filteredPosts.length;
-	postsContainer.innerHTML = "";
+	
 	filteredPosts.map((post) => createPost(post));
 
 	if (filteredPosts.length == 0) {
@@ -321,6 +332,8 @@ function refreshPosts() {
 	} else {
 		noResults.innerText = "";
 	}
+
+
 }
 
 function get_unit_image(input) {
